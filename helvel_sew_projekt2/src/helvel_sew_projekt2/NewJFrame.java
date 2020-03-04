@@ -101,7 +101,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel8.setText("Hersteller:");
 
-        jTextField8.setEditable(false);
         jTextField8.setText("AI");
 
         jButton3.setText("Add Auto");
@@ -118,6 +117,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton6.setText(">");
 
         jButton7.setText("Delete");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Clear");
 
@@ -322,6 +326,20 @@ public class NewJFrame extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+       try{
+                String sql =  "DELETE FROM auto WHERE id =? ";
+                pst = con.prepareStatement(sql);
+                pst.setString(1, jTextField8.getText());
+  
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "deleted succesfully");
+            }
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(null, ex);
+            }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
