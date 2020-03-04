@@ -19,6 +19,11 @@ public class NewJFrame extends javax.swing.JFrame {
              Connection con = null;
     public NewJFrame() {
         initComponents();
+        try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                System.out.println("Fehler beim Laden des Treibers");
+            }
     }
 
     /**
@@ -242,11 +247,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         try {
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {
-                System.out.println("Fehler beim Laden des Treibers");
-            }
+         
          
          String db = jTextFielddatenbank.getText();
          String user = jTextFieldusr.getText();
