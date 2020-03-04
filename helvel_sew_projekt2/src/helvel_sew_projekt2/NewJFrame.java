@@ -7,7 +7,10 @@ package helvel_sew_projekt2;
 
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,8 +18,11 @@ import java.sql.SQLException;
  */
 public class NewJFrame extends javax.swing.JFrame {
 
-   
              Connection con = null;
+             
+             PreparedStatement pst = null;
+             ResultSet rs= null;
+                
     public NewJFrame() {
         initComponents();
         try {
@@ -99,6 +105,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextField8.setText("AI");
 
         jButton3.setText("Add Auto");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Update");
 
@@ -286,11 +297,31 @@ public class NewJFrame extends javax.swing.JFrame {
             jTextFielddatenbank.enable();
             jTextFieldusr.enable();
             jTextFieldpwd.enable();
+            
                    
           
            
     
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+            try{
+                String sql =  "INSERT INTO auto"
+                        + "(modell, hersteller)"
+                        + " VALUES (?,?)";
+                pst = con.prepareStatement(sql);
+                pst.setString(1, jTextField6.getText());
+                pst.setString(2, jTextField7.getText());
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "inserted succesfully");
+            }
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
