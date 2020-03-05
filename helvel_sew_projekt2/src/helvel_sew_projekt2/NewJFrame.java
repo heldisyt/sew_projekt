@@ -57,9 +57,9 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        jTextFieldmodell = new javax.swing.JTextField();
+        jTextFieldhersteller = new javax.swing.JTextField();
+        jTextFieldid = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -101,7 +101,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel8.setText("Hersteller:");
 
-        jTextField8.setText("AI");
+        jTextFieldid.setText("AI");
 
         jButton3.setText("Add Auto");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +111,11 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jButton4.setText("Update");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("<");
 
@@ -169,7 +174,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldhersteller, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(2, 2, 2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,9 +187,9 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldid, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldmodell, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton3)))))
                 .addGap(151, 151, 151))
@@ -232,16 +237,16 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldmodell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldhersteller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -314,8 +319,8 @@ public class NewJFrame extends javax.swing.JFrame {
                         + "(modell, hersteller)"
                         + " VALUES (?,?)";
                 pst = con.prepareStatement(sql);
-                pst.setString(1, jTextField6.getText());
-                pst.setString(2, jTextField7.getText());
+                pst.setString(1, jTextFieldmodell.getText());
+                pst.setString(2, jTextFieldhersteller.getText());
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "inserted succesfully");
             }
@@ -331,7 +336,7 @@ public class NewJFrame extends javax.swing.JFrame {
        try{
                 String sql =  "DELETE FROM auto WHERE id =? ";
                 pst = con.prepareStatement(sql);
-                pst.setString(1, jTextField8.getText());
+                pst.setString(1, jTextFieldid.getText());
   
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "deleted succesfully");
@@ -340,6 +345,22 @@ public class NewJFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, ex);
             }
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       
+        try{
+                String sql =  "UPDATE auto SET modell=?,hersteller=? WHERE id=?";
+                pst = con.prepareStatement(sql);
+                 pst.setString(3,jTextFieldid.getText());
+                pst.setString(1, jTextFieldmodell.getText());
+                pst.setString(2, jTextFieldhersteller.getText());
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "updated succesfully");
+            }
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(null, ex);
+            }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -394,10 +415,10 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextFielddatenbank;
+    private javax.swing.JTextField jTextFieldhersteller;
+    private javax.swing.JTextField jTextFieldid;
+    private javax.swing.JTextField jTextFieldmodell;
     private javax.swing.JTextField jTextFieldport;
     private javax.swing.JTextField jTextFieldpwd;
     private javax.swing.JTextField jTextFieldserver;
